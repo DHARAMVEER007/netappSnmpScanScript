@@ -1,0 +1,84 @@
+# ===============================================================
+# NetApp OIDs to Add to Your SNMP Discovery Configuration
+# ===============================================================
+
+# These are the EXACT OIDs your sensor script is looking for
+# but your SNMP discovery is NOT currently querying
+
+# ===== SINGLE-VALUE OIDS (use snmpget) =====
+1.3.6.1.4.1.789.1.1.2.0     # Product Name
+1.3.6.1.4.1.789.1.1.3.0     # Product Version  
+1.3.6.1.4.1.789.1.1.9.0     # System Serial Number
+1.3.6.1.4.1.789.1.1.25.0    # Cluster Name
+1.3.6.1.4.1.789.1.1.26.0    # Node Name
+1.3.6.1.4.1.789.1.25.2.1.1  # Cluster UUID
+1.3.6.1.4.1.789.1.25.2.1.13 # Node Count
+
+# ===== INDEXED OIDS (use snmpwalk/snmpbulk) =====
+# These return multiple values (.1, .2, .3, etc.)
+
+1.3.6.1.4.1.789.1.5.4.1.2    # Volume Names → vol0, vol_nfs, vol_cifs
+1.3.6.1.4.1.789.1.5.4.1.29   # Volume Sizes
+1.3.6.1.4.1.789.1.5.4.1.5    # Volume States
+
+1.3.6.1.4.1.789.1.5.11.1.2   # Aggregate Names → aggr0, aggr1  
+1.3.6.1.4.1.789.1.5.11.1.3   # Aggregate States
+1.3.6.1.4.1.789.1.5.11.1.5   # Aggregate Sizes
+
+1.3.6.1.4.1.789.1.22.1.2.1.2 # Interface Names → e0a
+1.3.6.1.4.1.789.1.22.1.2.1.15 # Interface Status
+
+1.3.6.1.4.1.789.1.27.1.1.2   # VServer Names → svm-prod-nfs, svm-prod-cifs
+1.3.6.1.4.1.789.1.27.1.1.3   # VServer States
+
+1.3.6.1.4.1.789.1.17.15.1.2  # LUN Names → database_lun, vmware_lun
+1.3.6.1.4.1.789.1.17.15.1.4  # LUN States
+
+1.3.6.1.4.1.789.1.5.5.1.2    # Snapshot Names → hourly.2024-01-15_1200
+1.3.6.1.4.1.789.1.5.5.1.7    # Snapshot Created
+
+1.3.6.1.4.1.789.1.6.4.1.2    # Disk Names → 1a.00.0, 1a.00.1
+1.3.6.1.4.1.789.1.6.4.1.5    # Disk Sizes
+
+1.3.6.1.4.1.789.1.17.20.1.2  # Port Names → 0a, 0b
+1.3.6.1.4.1.789.1.17.20.1.5  # Port States
+
+1.3.6.1.4.1.789.1.4.6.1.2    # Qtree Names → qtree1, qtree_nfs
+1.3.6.1.4.1.789.1.4.6.1.3    # Qtree Volumes
+
+1.3.6.1.4.1.789.1.26.1.1.3   # Compression Enabled
+1.3.6.1.4.1.789.1.26.1.1.4   # Deduplication Enabled
+
+# ===============================================================
+# VERIFICATION COMMANDS
+# ===============================================================
+
+# Test single values:
+snmpget -v1 -c public 192.168.46.249 1.3.6.1.4.1.789.1.1.2.0
+snmpget -v1 -c public 192.168.46.249 1.3.6.1.4.1.789.1.1.25.0
+
+# Test indexed values (should return multiple results):
+snmpwalk -v1 -c public 192.168.46.249 1.3.6.1.4.1.789.1.5.4.1.2
+snmpwalk -v1 -c public 192.168.46.249 1.3.6.1.4.1.789.1.5.11.1.2
+
+# ===============================================================
+# EXPECTED RESULTS FROM YOUR EMULATOR
+# ===============================================================
+
+# 1.3.6.1.4.1.789.1.1.2.0 → "ONTAP"
+# 1.3.6.1.4.1.789.1.1.25.0 → "production-cluster-dc1"
+# 1.3.6.1.4.1.789.1.5.4.1.2.1 → "vol0"
+# 1.3.6.1.4.1.789.1.5.4.1.2.2 → "vol_nfs"
+# 1.3.6.1.4.1.789.1.5.11.1.2.1 → "aggr0"
+# 1.3.6.1.4.1.789.1.5.11.1.2.2 → "aggr1"
+# ... and many more
+
+# ===============================================================
+# HOW TO IMPLEMENT IN YOUR DISCOVERY SYSTEM
+# ===============================================================
+
+# Option 1: Add to SNMP OID list in your discovery configuration
+# Option 2: Use SNMP bulk operations for indexed OIDs
+# Option 3: Implement snmpwalk for OID trees (recommended for indexed OIDs)
+
+# Your emulator supports ALL these OIDs and will return proper NetApp data!

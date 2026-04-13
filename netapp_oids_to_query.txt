@@ -1,0 +1,89 @@
+# ====================================================
+# NetApp-Specific OIDs Your snmpSensorForNetApp Should Query
+# ====================================================
+
+# === Core NetApp Product Information ===
+1.3.6.1.4.1.789.1.1.2.0     # Product Name
+1.3.6.1.4.1.789.1.1.3.0     # Product Version  
+1.3.6.1.4.1.789.1.1.4.0     # Product ID
+1.3.6.1.4.1.789.1.1.5.0     # Product Vendor
+1.3.6.1.4.1.789.1.1.6.0     # Product Model
+1.3.6.1.4.1.789.1.1.9.0     # System Serial Number
+1.3.6.1.4.1.789.1.1.25.0    # Cluster Name
+1.3.6.1.4.1.789.1.1.26.0    # Node Name
+
+# === NetApp Cluster Information ===
+1.3.6.1.4.1.789.1.25.2.1.1  # Cluster UUID
+1.3.6.1.4.1.789.1.25.2.1.2  # Cluster Contact
+1.3.6.1.4.1.789.1.25.2.1.3  # Cluster Location
+1.3.6.1.4.1.789.1.25.2.1.13 # Node Count
+
+# === NetApp Node Information ===
+1.3.6.1.4.1.789.1.25.2.1.4  # Node Model
+1.3.6.1.4.1.789.1.25.2.1.5  # Node Serial Number
+1.3.6.1.4.1.789.1.25.2.1.8  # Node Uptime
+1.3.6.1.4.1.789.1.25.2.1.14 # Node Health
+
+# === NetApp Performance Counters ===
+1.3.6.1.4.1.789.1.2.2.1.0   # CPU Busy %
+1.3.6.1.4.1.789.1.2.2.2.0   # Total CPU Busy %
+1.3.6.1.4.1.789.1.2.2.14.0  # NFS Operations
+1.3.6.1.4.1.789.1.2.2.15.0  # CIFS Operations
+
+# === NetApp HA Status ===
+1.3.6.1.4.1.789.1.2.3.1.0   # HA State
+1.3.6.1.4.1.789.1.2.3.2.0   # HA Partner Name
+1.3.6.1.4.1.789.1.2.3.4.0   # Takeover Possible
+
+# === NetApp System Health ===
+1.3.6.1.4.1.789.1.2.4.1.0   # Over Temperature
+1.3.6.1.4.1.789.1.2.4.2.0   # Failed Fan
+1.3.6.1.4.1.789.1.2.4.3.0   # Failed Power Supply
+1.3.6.1.4.1.789.1.2.4.4.0   # Failed Disk
+
+# === NetApp AutoSupport ===
+1.3.6.1.4.1.789.1.2.7.1.0   # AutoSupport Status
+1.3.6.1.4.1.789.1.2.7.2.0   # AutoSupport Node Name
+
+# ====================================================
+# INDEXED OIDs (with .1, .2, .3, etc.)
+# ====================================================
+
+# === NetApp Volumes (indexed) ===
+1.3.6.1.4.1.789.1.5.4.1.2.1   # Volume Name (index 1)
+1.3.6.1.4.1.789.1.5.4.1.29.1  # Volume Size (index 1)
+1.3.6.1.4.1.789.1.5.4.1.30.1  # Volume Used (index 1)
+1.3.6.1.4.1.789.1.5.4.1.31.1  # Volume Available (index 1)
+1.3.6.1.4.1.789.1.5.4.1.5.1   # Volume State (index 1)
+1.3.6.1.4.1.789.1.5.4.1.23.1  # Volume Type (index 1)
+
+# === NetApp Aggregates (indexed) ===
+1.3.6.1.4.1.789.1.5.11.1.2.1  # Aggregate Name (index 1)
+1.3.6.1.4.1.789.1.5.11.1.3.1  # Aggregate State (index 1)
+1.3.6.1.4.1.789.1.5.11.1.4.1  # Aggregate Status (index 1)
+1.3.6.1.4.1.789.1.5.11.1.5.1  # Aggregate Size (index 1)
+1.3.6.1.4.1.789.1.5.11.1.6.1  # Aggregate Used (index 1)
+1.3.6.1.4.1.789.1.5.11.1.7.1  # Aggregate Available (index 1)
+
+# === NetApp VServers (indexed) ===
+1.3.6.1.4.1.789.1.27.1.1.2.1  # VServer Name (index 1)
+1.3.6.1.4.1.789.1.27.1.1.3.1  # VServer State (index 1)
+1.3.6.1.4.1.789.1.27.1.1.4.1  # VServer Type (index 1)
+1.3.6.1.4.1.789.1.27.1.1.5.1  # VServer UUID (index 1)
+
+# === NetApp Network Interfaces (indexed) ===
+1.3.6.1.4.1.789.1.22.1.2.1.2.1  # Interface Name (index 1)
+1.3.6.1.4.1.789.1.22.1.2.1.3.1  # Interface IP (index 1)
+1.3.6.1.4.1.789.1.22.1.2.1.4.1  # Interface Netmask (index 1)
+1.3.6.1.4.1.789.1.22.1.2.1.15.1 # Interface Status (index 1)
+1.3.6.1.4.1.789.1.22.1.2.1.16.1 # Interface Speed (index 1)
+
+# ====================================================
+# USAGE INSTRUCTIONS
+# ====================================================
+# 
+# 1. Add these OIDs to your snmpSensorForNetApp query list
+# 2. For indexed OIDs, try multiple indices (.1, .2, .3, .4)
+# 3. Test with: snmpget -v1 -c public 192.168.46.249 <OID>
+# 4. Your emulator supports all these OIDs!
+#
